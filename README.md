@@ -1,36 +1,75 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# Code Documentation Bot
 
-## Getting Started
+#### Group Members: Apollo B. | Onesti B. | Haven H. | Pierce I.
 
-First, run the development server:
+---
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+**Project Topic:** AI-Enhanced Documentation
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+---
 
-You can start editing the page by modifying `app/page.js`. The page auto-updates as you edit the file.
+**Project Goal / Problem Statement**
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+Writing and updating the documentation of codebases takes a significant amount of time from developers. Missing comments, outdated information, and inconsistent formatting are factors that can lead to frustration, confusion, and poor credibility. The goal of our project is to simplify this process by developing a platform that will automatically generate readable and well-organized, documentation based on pasted code snippets.
 
-## Learn More
+Our application will be built using Next.js, showing in-class concepts such as state management, routing, reusable components, and built-in error handling. Users will simply paste code snippets, and our system will generate organized documentation that contains class descriptions, parameter lists, return value summaries, and markdown formatting.
 
-To learn more about Next.js, take a look at the following resources:
+The use of our project will cut down on the time and work it takes to write documentation, while still making sure it is accurate and consistent.
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+**Expected Output / Demo Idea**
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+Our demo will show a user pasting code and receiving AI-generated documentation in a clean, formatted layout.
 
-## Deploy on Vercel
+---
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+### Core Features
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+**Home Page**
+
+- Clean landing screen with a call to action button.
+- “Generate” > Leads to Code Input Page
+
+**Code Input Page**
+
+- Text are for code input
+- Button to generate documentation
+
+**Documentation Output Page**
+
+- Rendered documentation
+
+### Mockup Description
+
+- Nav Bar: Home | Generate | About
+- Main Input Card: Large code box + “Generate” button
+- Output Card: Documentation view
+- Footer: Small Links to GitHub / About
+
+---
+
+### Roles of Group Members
+
+- Onesti Brookins - Frontend UI/UX Lead
+
+  - Builds core page layouts and styling
+  - Creates reusable components (buttons, layout wrappers, input cards)
+
+- Apollo - Routing & State Management Lead
+
+  - Implements Next.js routing for home > input > output
+  - Manages global state for code input/output
+
+- Pierce - AI Processing & Documentation
+
+  - Builds function that sends code to the documentation generator API
+  - Handles formatting, markdown rendering, and error cases
+
+- Haven Hamelin - Component Architecture & Error Handling
+  - Creates error pages, loading states, and fallback UI.
+  - Guarantee components follow clean architecture principles.
+
+### Everyone will collaborate on the deliverables
+
+- Proposal Paper
+- Coding
+- PPT
