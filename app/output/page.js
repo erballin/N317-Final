@@ -8,7 +8,7 @@ import Button, { SecondaryButton } from "@/components/Button";
 import Card from "@/components/Card";
 
 export default function OutputPage() {
-  const forceError = true; // Set to true to test global error boundary
+  const forceError = false; // Set to true to test global error boundary
   if (forceError) {
     throw new Error("Intentional test error from /output");
   }
