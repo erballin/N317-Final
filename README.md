@@ -8,7 +8,7 @@
 
 ---
 
-**Project Goal / Problem Statement**
+## **Project Goal / Problem Statement**
 
 Writing and updating the documentation of codebases takes a significant amount of time from developers. Missing comments, outdated information, and inconsistent formatting are factors that can lead to frustration, confusion, and poor credibility. The goal of our project is to simplify this process by developing a platform that will automatically generate readable and well-organized, documentation based on pasted code snippets.
 
@@ -16,7 +16,7 @@ Our application will be built using Next.js, showing in-class concepts such as s
 
 The use of our project will cut down on the time and work it takes to write documentation, while still making sure it is accurate and consistent.
 
-**Expected Output / Demo Idea**
+## **Expected Output / Demo Idea**
 
 Our demo will show a user pasting code and receiving AI-generated documentation in a clean, formatted layout.
 
