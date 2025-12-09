@@ -1,75 +1,55 @@
 # Code Documentation Bot
 
-#### Group Members: Apollo B. | Onesti B. | Haven H. | Pierce I.
+AI-enhanced documentation generator that turns pasted source code into clean, structured Markdown using Gemini. Built with Next.js to showcase routing, state management, reusable components, and error handling.
 
----
+## Team
+Apollo B. | Onesti B. | Haven H. | Pierce I.
 
-**Project Topic:** AI-Enhanced Documentation
+## Key Features
+- Home, Generate, and About pages with clear navigation and CTA.
+- Generate page: language select + code textarea, validation, loading state, POST to `/api/chat`.
+- Output page: renders returned Markdown (ReactMarkdown + GFM), shows input summary, copy/download actions, loading skeletons, and “no data” fallback.
+- Error handling: global error boundary, 404 page, client-side validation for empty input, API guard for missing code.
+- State: code + language + AI response persisted via `localStorage` between generate/output routes.
 
----
+## Design Choices
+- Next.js App Router with client components where interactivity is required.
+- Tailwind for consistent styling and responsive layout.
+- Local storage for lightweight cross-page state (no backend DB needed for demo).
+- `react-markdown` + `remark-gfm` for safe Markdown rendering with tables/lists.
+- Graceful failure: explicit error cards, loading skeletons, and a global error boundary with retry links.
 
-## **Project Goal / Problem Statement**
+## Tech Stack / Dependencies
+- Framework: Next.js 16, React 19.
+- Styling: Tailwind CSS.
+- AI: `@ai-sdk/google` with Gemini 2.5 Flash via `GOOGLE_GENERATIVE_AI_API_KEY`.
+- Markdown: `react-markdown`, `remark-gfm`.
 
-Writing and updating the documentation of codebases takes a significant amount of time from developers. Missing comments, outdated information, and inconsistent formatting are factors that can lead to frustration, confusion, and poor credibility. The goal of our project is to simplify this process by developing a platform that will automatically generate readable and well-organized, documentation based on pasted code snippets.
+## Run Locally
+1) Install deps: `npm install`
+2) Create `.env.local` in the project root:
+   ```
+   GOOGLE_GENERATIVE_AI_API_KEY=your_key_here
+   ```
+3) Start dev server: `npm run dev`
+4) Visit `http://localhost:3000`
 
-Our application will be built using Next.js, showing in-class concepts such as state management, routing, reusable components, and built-in error handling. Users will simply paste code snippets, and our system will generate organized documentation that contains class descriptions, parameter lists, return value summaries, and markdown formatting.
+## Usage
+- Go to `/generate`, pick a language, paste code, click “Generate Docs”.
+- You’ll be routed to `/output` where the Markdown renders; use copy/download buttons as needed.
+- “Start Over” returns to `/generate`; 404 and error pages are implemented for bad routes/unexpected errors.
 
-The use of our project will cut down on the time and work it takes to write documentation, while still making sure it is accurate and consistent.
+## Responsibilities
+- Onesti Brookins — Frontend UI/UX (layout, styling, reusable components)
+- Apollo — Routing & state management (page flow, data persistence)
+- Pierce — AI processing & documentation (API call to Gemini, markdown formatting)
+- Haven Hamelin — Component architecture & error handling (error/loading/404, fallbacks)
 
-## **Expected Output / Demo Idea**
+## Notes for Vercel
+- Add `GOOGLE_GENERATIVE_AI_API_KEY` in Vercel project settings → Environment Variables.
+- Framework preset: Next.js; build command `next build` (default), output `.next`.
+- Keep `.env.local` out of git; Vercel env supplies the key at runtime.
 
-Our demo will show a user pasting code and receiving AI-generated documentation in a clean, formatted layout.
-
----
-
-### Core Features
-
-**Home Page**
-
-- Clean landing screen with a call to action button.
-- “Generate” > Leads to Code Input Page
-
-**Code Input Page**
-
-- Text are for code input
-- Button to generate documentation
-
-**Documentation Output Page**
-
-- Rendered documentation
-
-### Mockup Description
-
-- Nav Bar: Home | Generate | About
-- Main Input Card: Large code box + “Generate” button
-- Output Card: Documentation view
-- Footer: Small Links to GitHub / About
-
----
-
-### Roles of Group Members
-
-- Onesti Brookins - Frontend UI/UX Lead
-
-  - Builds core page layouts and styling
-  - Creates reusable components (buttons, layout wrappers, input cards)
-
-- Apollo - Routing & State Management Lead
-
-  - Implements Next.js routing for home > input > output
-  - Manages global state for code input/output
-
-- Pierce - AI Processing & Documentation
-
-  - Builds function that sends code to the documentation generator API
-  - Handles formatting, markdown rendering, and error cases
-
-- Haven Hamelin - Component Architecture & Error Handling
-  - Creates error pages, loading states, and fallback UI.
-  - Guarantee components follow clean architecture principles.
-
-### Everyone will collaborate on the deliverables
-
-- Proposal Paper
-- Finished Codebase
-- PowerPoint Slideshow
+## Additional Considerations
+- Test error toggle in `app/output/page.js` (`forceError`) can be set to `true` locally to view the error boundary; keep it `false` in production.
+- Manual test flow: run through generate → output with sample code, verify copy/download, and check 404/error pages. 
