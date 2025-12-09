@@ -71,5 +71,5 @@ Our demo will show a user pasting code and receiving AI-generated documentation 
 ### Everyone will collaborate on the deliverables
 
 - Proposal Paper
-- Coding
-- PPT
+- Finished Codebase
+- PowerPoint Slideshow
