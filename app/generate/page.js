@@ -1,53 +1,52 @@
 "use client";
 
 import { useState } from "react";
-
+import { useRouter } from "next/navigation";
 import Button from "@/components/Button";
 import Card from "@/components/Card";
 import Link from "next/link";
 
 export default function GeneratePage() {
-  const [language, setLanguage] = useState("html"); // Defaults to HTML
-  const [code, setCode] = useState(""); // State for code, the user will input
-  const [documentation, setDocumentation] = useState(""); // Hold the generated documentation from the AI
-  const [isLoading, setIsLoading] = useState(false); // Loading state for generation process
-  const [error, setError] = useState(); // Stores any error messages
+  const router = useRouter();
+  const [language, setLanguage] = useState("JavaScript");
+  const [code, setCode] = useState("");
+  const [isLoading, setIsLoading] = useState(false);
+  const [error, setError] = useState("");
 
-  // console.log(language);
-  // console.log(code);
-
-  const documentCodePrompt = async () => {
-    setDocumentation("");
+  const handleGenerate = async () => {
     setError("");
 
-    try {
-      // console.log(language);
-      // console.log(code);
+    if (!code.trim()) {
+      setError("Please paste some code to generate documentation.");
+      return;
+    }
 
+    setIsLoading(true);
+    try {
       const response = await fetch("/api/chat", {
-        // sends "500 internal server error" response
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({
-          language: language,
-          code: code,
-        }),
+        body: JSON.stringify({ language, code }),
       });
 
-      // console.log(response);
-
-      const data = await response.json().catch(() => {
-        console.log(data);
-        throw new Error("Failed to read response data");
-      });
-
-      if (data.documentation) {
-        console.log(data.documentation);
-      } else {
-        throw new Error("No Documentation Found.");
+      const data = await response.json();
+      if (!response.ok) {
+        throw new Error(data?.error || "Unable to generate documentation.");
       }
-    } catch (error) {
-      setError(error.message);
+
+      const payload = {
+        markdown: data.markdown,
+        metadata: data.metadata,
+        code,
+        language,
+      };
+      localStorage.setItem("docugen:result", JSON.stringify(payload));
+
+      router.push("/output");
+    } catch (err) {
+      setError(err.message || "Something went wrong. Please try again.");
+    } finally {
+      setIsLoading(false);
     }
   };
 
@@ -61,26 +60,43 @@ export default function GeneratePage() {
       <Card title="Code Editor" className="shadow-lg">
         <div className="space-y-6">
           <div className="flex gap-4">
-            {/* UPDATED DROPDOWN: HTML & JavaScript */}
             <select
               className="rounded-md border border-slate-300 px-3 py-2 text-sm text-slate-700 focus:border-emerald-500 focus:outline-none"
+              value={language}
               onChange={(e) => setLanguage(e.target.value)}
             >
-              <option>HTML</option>
-              <option>JavaScript</option>
+              <option value="JavaScript">JavaScript</option>
+              <option value="TypeScript">TypeScript</option>
+              <option value="HTML">HTML</option>
+              <option value="Python">Python</option>
+              <option value="Java">Java</option>
             </select>
           </div>
 
           <textarea
             className="min-h-[300px] w-full rounded-lg border border-slate-300 bg-slate-50 p-4 font-mono text-sm focus:border-emerald-500 focus:outline-none"
             placeholder="// Paste your code here..."
+            value={code}
             onChange={(e) => setCode(e.target.value)}
           ></textarea>
 
-          <div className="flex justify-end border-t border-slate-100 pt-4">
-            <Link href="/output">
-              <Button onClick={documentCodePrompt}>Generate Docs →</Button>
+          {error && (
+            <div className="rounded-md border border-red-200 bg-red-50 px-4 py-3 text-sm text-red-700">
+              {error}
+            </div>
+          )}
+
+          <div className="flex flex-col gap-3 border-t border-slate-100 pt-4 sm:flex-row sm:items-center sm:justify-between">
+            <Link href="/output" className="text-sm text-slate-500 hover:text-slate-700">
+              View last generated output
             </Link>
+            <Button
+              className="flex items-center justify-center gap-2 disabled:opacity-60"
+              onClick={handleGenerate}
+              disabled={isLoading}
+            >
+              {isLoading ? "Generating..." : "Generate Docs →"}
+            </Button>
           </div>
         </div>
       </Card>
