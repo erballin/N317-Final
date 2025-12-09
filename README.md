@@ -5,6 +5,9 @@ AI-enhanced documentation generator that turns pasted source code into clean, st
 ## Team
 Apollo B. | Onesti B. | Haven H. | Pierce I.
 
+## Live Demo
+https://n317-final.vercel.app/
+
 ## Key Features
 - Home, Generate, and About pages with clear navigation and CTA.
 - Generate page: language select + code textarea, validation, loading state, POST to `/api/chat`.
@@ -33,9 +36,6 @@ Apollo B. | Onesti B. | Haven H. | Pierce I.
    ```
 3) Start dev server: `npm run dev`
 4) Visit `http://localhost:3000`
-
-## Live Demo
-https://n317-final.vercel.app/
 
 ## Usage
 - Go to `/generate`, pick a language, paste code, click “Generate Docs”.
