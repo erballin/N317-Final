@@ -43,10 +43,10 @@ https://n317-final.vercel.app/
 - “Start Over” returns to `/generate`; 404 and error pages are implemented for bad routes/unexpected errors.
 
 ## Responsibilities
-- Onesti Brookins — Frontend UI/UX (layout, styling, reusable components)
+- Onesti — Frontend UI/UX (layout, styling, reusable components)
 - Apollo — Routing & state management (page flow, data persistence)
 - Pierce — AI processing & documentation (API call to Gemini, markdown formatting)
-- Haven Hamelin — Component architecture & error handling (error/loading/404, fallbacks)
+- Haven — Component architecture & error handling (error/loading/404, fallbacks)
 
 ## Notes for Vercel
 - Add `GOOGLE_GENERATIVE_AI_API_KEY` in Vercel project settings → Environment Variables.
